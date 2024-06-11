@@ -1,0 +1,121 @@
+/* Viewtest.css */
+
+.container {
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1;
+  display: flex;
+}
+
+.test-section {
+  flex: 1;
+
+}
+
+.test-table {
+  width: auto;
+  border-collapse: collapse;
+  border-radius: 10px; /* Sets border radius for the entire table */
+  overflow: hidden; /* Ensures the border-radius is applied to the corners */
+  position: relative; /* Positioning for the pseudo-elements */
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.test-table th {
+  padding: 8px;
+  text-align: center;
+  background-color: #2C3A47;
+  color: white;
+}
+
+.test-table td {
+  padding: 8px;
+  cursor: pointer;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+
+
+
+.question-section {
+  flex: 1;
+}
+
+.questions-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px; /* Sets border radius for the entire table */
+  overflow: hidden; /* Ensures the border-radius is applied to the corners */
+  position: relative; /* Positioning for the pseudo-elements */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.questions-table td {
+  padding: 8px;
+  width: auto;
+  text-align: center;
+  
+}
+
+.questions-table th {
+  text-align: center;
+  background-color: #2C3A47;
+  color: white;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.questions-table tr:nth-child(even) td {
+  background-color: #f2f2f2; /* Grey background for even rows */
+}
+
+
+.test-dropdown {
+  border: 2px solid #2C3A47;
+  background-image: linear-gradient(220.55deg, #5D85A6 0%, #0E2C5E 100%);
+  max-width: auto;
+  cursor: pointer;
+  color: white;
+  font-family: Roboto;
+}
+
+
+.test-dropdown option {
+  background-color: #303952; /* Background color */
+  color: white; /* Font color */
+}
+
+
+
+.Qedit{
+  width: 100%;
+  
+}
+
+
+.fa.fa-copy {
+  margin-left: 1%;
+  cursor: pointer;
+}
+
+.fa.fa-copy:hover {
+  color: #84817a
+}
+
+.fa.fa-trash {
+  color: red;
+  cursor: pointer;
+}
+
+.fas.fa-edit:hover{
+  color: green;
+  cursor: pointer;
+}
+.fa.fa-plus-circle{
+ 
+  color: green;
+  cursor: pointer;
+}

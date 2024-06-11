@@ -1,0 +1,66 @@
+.c-container{
+  height: 100vh;
+  z-index: -1;
+  display: flex;
+}
+.sheading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column; 
+  }
+  
+.studentdash{
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1;
+   
+  }
+
+  .testing{
+    justify-content: center;
+    align-items: center;
+  }
+
+  .topleft{
+    position: absolute;
+    top: 10%;
+    left: 5%;
+  }
+
+ 
+  .test-card {
+    width: 190px;
+    height: 154px;
+    margin: 0 auto;
+    background-color: #011522;
+    border-radius: 8px;
+    z-index: 1;
+   }
+   
+   
+   
+
+   .test-link{
+    margin-left: 10px;
+    margin-top: 25px;
+    border: 1px solid silver;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    font-family: Phantomsans, sans-serif;
+    font-size: 20px;
+    justify-content: center;
+    line-height: 1em;
+    max-width: 90%;
+    min-width: 140px;
+    padding: 19px 24px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+  
+   }

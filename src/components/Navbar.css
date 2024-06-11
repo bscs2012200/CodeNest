@@ -1,0 +1,74 @@
+.vertical-navbar {
+  width: 100%; /* Change width to 100% for responsiveness */
+  max-width: 250px; /* Add max-width to limit the width on larger screens */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(89deg, rgb(21, 74, 189) 0.1%, rgb(26, 138, 211) 51.5%, rgb(72, 177, 234) 100.2%);
+  padding: 20px; /* Adjust padding */
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: transform 0.3s ease;
+  transform: translateX(-100%);
+  z-index: 1;
+}
+
+/* Add a media query for smaller screens */
+@media only screen and (max-width: 768px) {
+  .vertical-navbar {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+}
+
+.vertical-navbar.open {
+  transform: translateX(0);
+}
+
+.vertical-navbar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.vertical-navbar li {
+  margin-bottom: 10px;
+  font-size: 18px; /* Adjust the font size as needed */
+}
+
+
+.vertical-navbar li a {
+  text-decoration: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+.vertical-navbar li a:hover {
+  background-color: #dfe6e9;
+  color: black;
+  border-radius: 5px;
+  font-size: inherit;
+}
+
+.Navlogo {
+  margin-left: 50px;
+  height: 60px;
+  width: 80px;
+}
+
+.name{
+  margin-left: 30px;
+}
+
+.logout{
+  margin-top: 60%;
+}
+
+.dashb{
+  margin-top: 50%;
+}
+
+
+
