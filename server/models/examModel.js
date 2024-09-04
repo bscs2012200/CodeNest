@@ -11,7 +11,8 @@ const ExamSchema = new mongoose.Schema({
   email: String,
   duration:Number,
   courseName: String,
-  totalMarks: Number
+  totalMarks: Number,
+  section: String
 });
 
 const ExamModel = mongoose.model('exam', ExamSchema);

@@ -1,50 +1,70 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import IDE from "./IDE.jsx";
-import './style.css';
-import NavBar from "./NavBar.jsx";
+import './Liveide.css';
+import Sidebar2 from "./sidebar2.jsx";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa"; // Assuming you're using react-icons for the arrows
 
 const LiveIDE = () => {
+    const [codes, setCodes] = useState([]);
+    const [expandedSections, setExpandedSections] = useState({}); // Track expanded state
 
-    const [codes, setCodes] = useState([])
-    const fetchCodes = () => axios.get(`http://localhost:3001/codes`).then(srces => setCodes(srces.data));
-
-   
+    const fetchCodes = () => axios.get(`http://localhost:3001/codes`).then(response => setCodes(response.data));
 
     useEffect(() => {
-        window.addEventListener("scroll", () => {
-            let current = "";
-            document.querySelectorAll("div.sec").forEach((div) => {
-                let sectionTop = div.offsetTop;
+        const handleScroll = () => {
+            let currentSection = "";
+            document.querySelectorAll(".section").forEach((section) => {
+                let sectionTop = section.offsetTop;
                 if (window.scrollY >= sectionTop - 65) {
-                    current = div.getAttribute("id");
+                    currentSection = section.getAttribute("id");
                 }
             });
-            document.querySelectorAll("nav ul li a").forEach((li) => {
-                li.classList.remove("active");
-                document.querySelector(`nav ul li a[href*=${current}]`).classList.add("active");
+            document.querySelectorAll(".navbar-link").forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("href").includes(currentSection)) {
+                    link.classList.add("active");
+                }
             });
-        });
+        };
+
+        window.addEventListener("scroll", handleScroll);
         fetchCodes();
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
     }, []);
 
-    console.log(`http://${window.location.host}`);
+    const toggleSection = (id) => {
+        setExpandedSections(prevState => ({
+            ...prevState,
+            [id]: !prevState[id]
+        }));
+    };
 
     return (
-        <div className="ide-content">
-          
-            <div className="content">
-                <main>
-                    {codes.map((item, i) => (
-                        <div className="sec" id={`ide-${item.filename}`} key={i}>
-                            <h4>{item.title}</h4>
-                            <IDE item={item} />
+        <div className="live-ide-container">
+            <Sidebar2 />
+            <div className="content-wrapper">
+            <div className="welcome-section">
+                <h1>Welcome to the Live IDE</h1>
+                <p className="info-text">You have 4 templates to practice with.</p>
+            </div>
+                <main className="ide-main">
+                    {codes.map((item, index) => (
+                        <div className="section" id={`ide-${item.filename}`} key={index}>
+                            <div className="section-header" onClick={() => toggleSection(item.filename)}>
+                                <h4 className="section-title">{item.title}</h4>
+                                {expandedSections[item.filename] ? 
+                                    <FaChevronUp className="toggle-icon" /> :
+                                    <FaChevronDown className="toggle-icon" />}
+                            </div>
+                            {expandedSections[item.filename] && <IDE item={item} />}
                         </div>
                     ))}
                 </main>
-
             </div>
-           
         </div>
     );
 };

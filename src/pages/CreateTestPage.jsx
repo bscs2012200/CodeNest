@@ -22,6 +22,7 @@ const CreateTestPage = () => {
   const [newMarks, setNewMarks] = useState('');
   const [testDuration, setTestDuration] = useState(''); 
   const [courseName, setCourseName] = useState(''); 
+  const [section, setsection] = useState(''); 
   const email = Cookies.get('email');
   const [teacherProfileData, setTeacherProfileData] = useState(null);
   const [IsCreated, setIsCreated] = useState(false);
@@ -127,7 +128,8 @@ const handleSubmitTest = async () => {
       duration: testDuration,
       email,
       courseName,
-      totalMarks 
+      totalMarks,
+      section
     });
       console.log('Test submitted successfully!');
       setAlertMessage('Test Created Successfully');
@@ -193,9 +195,13 @@ const handleSubmitTest = async () => {
   <label htmlFor="courseName">Course Name:</label>
   <input type="text" id="courseName" className="course-name-input" value={courseName} onChange={(e) => setCourseName(e.target.value)} />
 </div>
+<div className="form-group">
+  <label htmlFor="courseName">Section:</label>
+  <input type="text" id="section" className="course-name-input" value={section} onChange={(e) => setsection(e.target.value)} />
+</div>
   <div>
     <label>Select Test Type:</label>
-    <select value={selectedTestType} onChange={handleTestTypeChange}>
+    <select className='course-name-input' value={selectedTestType} onChange={handleTestTypeChange}>
       <option value="">Select Test Type</option>
       <option value="Quiz">Quiz</option>
       <option value="Assignment">Assignment</option>

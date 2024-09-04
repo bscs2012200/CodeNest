@@ -34,7 +34,7 @@ const Sidebar = () => {
               <CDBSidebarMenuItem icon="edit">Update test</CDBSidebarMenuItem>
             </NavLink>
             
-            <NavLink exact to="/resetpassword" activeClassName="activeClicked">
+            <NavLink exact to="/reset-password" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="key">Reset Password</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>

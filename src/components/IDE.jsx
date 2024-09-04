@@ -69,6 +69,7 @@ const IDE = ({ item }) => {
                 Compile
                 
             </button>
+            <br></br>
             output:
             <div style={{ width: 1162, height: 200, backgroundColor: "#f5f5f5" }}>
                 {execute !== 0 ? <Term cols={132} rows={11} filename={item.filename} execute={execute} /> : null}

@@ -64,13 +64,13 @@ const Dashboard = () => {
         </div>
       </div>
       <div className='button-container'>
-        <button onClick={() => handleNavigation('/createtest')} className='Loginteacher'>
+        <button onClick={() => handleNavigation('/createtest')} className='button99'>
           Create Test
         </button>
-        <button onClick={() => handleNavigation('/listid')} className='Loginteacher'style={{marginLeft:'10px'}}>
+        <button onClick={() => handleNavigation('/listid')} className='button99'style={{marginLeft:'10px'}}>
           Update test
         </button>
-        <button onClick={() => handleNavigation('/s')} className='Loginteacher'style={{marginLeft:'10px'}}>
+        <button onClick={() => handleNavigation('/s')} className='button99'style={{marginLeft:'10px'}}>
           Grade test
         </button>
       </div>

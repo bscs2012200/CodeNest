@@ -7,11 +7,24 @@ const IDES = ({ language, item, filename, extension, testId, regno, questionId,n
     const editorRef = useRef(null);
     const [execute, setExecute] = useState(0);
     const [saveStatus, setSaveStatus] = useState(null);
+    const [saveDate, setsaveDate] = useState(getCurrentDate());
     function handleEditorDidMount(editor, monaco) {
         editor.getModel().updateOptions({ tabSize: 4 });
         editor.getAction("editor.action.formatDocument").run();
         editorRef.current = editor;
     }
+
+    function getCurrentDate() {
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        const day = String(currentDate.getDate()).padStart(2, '0');
+    
+        return `${day}-${month}-${year}`;
+    }
+    
+     // Output: YYYY-MM-DD
+    
 
     function showValue() {
         console.log(editorRef.current.getValue());
@@ -21,6 +34,7 @@ const IDES = ({ language, item, filename, extension, testId, regno, questionId,n
         console.log(questionId);
         console.log(language);
         console.log(name);
+        console.log(saveDate);
 
 
         setExecute(0);
@@ -57,7 +71,8 @@ const IDES = ({ language, item, filename, extension, testId, regno, questionId,n
             language: language,
             testId: testId,
             questionId: questionId,
-            name: name
+            name: name,
+            date: saveDate
         })
         .then((res) => {
             // Log response to check if it's returning "saved" or "updated"

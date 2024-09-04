@@ -16,6 +16,7 @@ function TestListPage() {
     language: '',
     courseName: '',
     duration: '',
+    section: '',
   });
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
@@ -121,6 +122,8 @@ const [deletingQuestionIndex, setDeletingQuestionIndex] = useState(-1);
       language: examDetails.language,
       courseName: examDetails.courseName,
       duration: examDetails.duration,
+      section: examDetails.section,
+      
     });
   };
 
@@ -155,6 +158,7 @@ const [deletingQuestionIndex, setDeletingQuestionIndex] = useState(-1);
         language: updatedTest.language,
         courseName: updatedTest.courseName,
         duration: updatedTest.duration,
+        section: updatedTest.section,
       });
 
       setIsEditing(false);
@@ -219,6 +223,10 @@ const [deletingQuestionIndex, setDeletingQuestionIndex] = useState(-1);
   };
 
   const handleSaveQuestionClick = async (questionIndex) => {
+    if (parseInt(editedQuestion.marks) < 1) {
+      setErrorMessage('Marks cannot be less than 1');
+      return;
+    }
     try {
       const updatedQuestions = [...examDetails.questions];
       updatedQuestions[questionIndex] = {
@@ -325,6 +333,11 @@ const [deletingQuestionIndex, setDeletingQuestionIndex] = useState(-1);
                 <input type="text" id="duration" name="duration" value={editedTestDetails.duration} onChange={handleInputChange} />
                 {errors.duration && <Alert variant="danger">{errors.duration}</Alert>}
               </div>
+              <div className="form-group">
+                <label htmlFor="section">Section:</label>
+                <input type="text" id="section" name="section" value={editedTestDetails.section} onChange={handleInputChange} />
+                {errors.section && <Alert variant="danger">{errors.section}</Alert>}
+              </div>
               <Button type="submit">Update Test</Button>
               <Button style={{marginTop: '10px'}} variant="danger" onClick={() => openConfirmationModal(selectedTestId)}>Delete Test</Button>
             </form>
@@ -372,6 +385,7 @@ const [deletingQuestionIndex, setDeletingQuestionIndex] = useState(-1);
                   <th>Course</th>
                   <th>Time Duration</th>
                   <th>Total marks</th>
+                  <th>Section</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -383,6 +397,7 @@ const [deletingQuestionIndex, setDeletingQuestionIndex] = useState(-1);
                   <td>{examDetails.courseName}</td>
                   <td>{examDetails.duration} Minutes</td>
                   <td>{examDetails.totalMarks}</td>
+                  <td>{examDetails.section}</td>
                   <td>
                     <button className='btn btn-primary' onClick={handleEditButtonClick}>Edit</button>
                   </td>

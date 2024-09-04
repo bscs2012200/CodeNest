@@ -1,34 +1,35 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Tnav from '../components/Tnav';
+import './Resetpassword.css';
+import Logo from '../assets/codenest.png';
+import Sidebar from "../components/sidebar.jsx";
 import Hamburger from '../components/Hamburger';
-Hamburger
+
 function ResetPassword() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [authenticated, setAuthenticated] = useState(false);
-  const [alertMessage, setAlertMessage] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleAuthenticate = (e) => {
     e.preventDefault();
 
     axios.post('http://localhost:3001/login', { email, password })
       .then(result => {
-        console.log(result);
         if (result.data === "Login successful") {
           setAuthenticated(true);
-          setAlertMessage("Authentication successful")
+          setErrorMessage("Authentication successful");
         } else {
-          setAlertMessage("Authentication failed")
+          setErrorMessage("Authentication failed");
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.error(err);
+        setErrorMessage("An error occurred. Please try again later.");
+      });
   };
 
   const handleUpdatePassword = (e) => {
@@ -36,42 +37,57 @@ function ResetPassword() {
 
     axios.post('http://localhost:3001/reset-password', { email, password: newPassword })
       .then(result => {
-        console.log(result);
-        setAlertMessage("Password update successful")
-
-        
+        setErrorMessage("Password update successful");
+        navigate('/login');
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.error(err);
+        setErrorMessage("An error occurred. Please try again later.");
+      });
   };
 
   return (
-    <div className="reset-password">
-      <Tnav {...{ isOpen }} />
-      <Hamburger isOpen={isOpen} toggleMenu={toggleMenu} />
-      {alertMessage && (
-        <div
-          className={`alert ${alertMessage.includes('successful') ? 'alert-success' : 'alert-danger'}`}
-          role='alert'
-        >
-          {alertMessage}
+    <div className='reset-container'>
+      <Sidebar />
+    <div className='r-container'>
+       
+      <div className='r-card'>
+        <div className="logo-container">
+          <img src={Logo} className="CNlogo" alt="CodeNest Logo"/>
         </div>
-      )}
-
-      {!authenticated ? (
-        <form onSubmit={handleAuthenticate}>
-          <label>Email:</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <label>Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-          <button type="submit">Authenticate</button>
-        </form>
-      ) : (
-        <form onSubmit={handleUpdatePassword}>
-          <label>New Password:</label>
-          <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
-          <button type="submit">Update Password</button>
-        </form>
-      )}
+        <h2 className="fw-bold fs-5" style={{textAlign: 'center'}}>Reset your password</h2>
+        {errorMessage && (
+          <div className={`alert ${errorMessage.includes('successful') ? 'alert-success' : 'alert-danger'}`} role="alert">
+            {errorMessage}
+          </div>
+        )}
+        {!authenticated ? (
+          <form onSubmit={handleAuthenticate}>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                <i className="fa fa-envelope"></i> Email
+              </label>
+              <input type="email" className="form-control" placeholder="Enter Your E-Mail" id="email" onChange={(e) => setEmail(e.target.value)} />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">
+                <i className="fa fa-lock"></i> Password
+              </label>
+              <input type="password" className="form-control" placeholder="Enter Your Password" id="password" onChange={(e) => setPassword(e.target.value)} />
+            </div>
+            <button type="submit" className="btnsubmit">Authenticate</button>
+          </form>
+        ) : (
+          <form onSubmit={handleUpdatePassword}>
+            <div className="mb-3">
+              <label htmlFor="newPassword" className="form-label">New Password</label>
+              <input type="password" className="form-control" id="newPassword" placeholder="Enter Your New Password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+            </div>
+            <button type="submit" className="btnsubmit">Update Password</button>
+          </form>
+        )}
+      </div>
+    </div>
     </div>
   );
 }

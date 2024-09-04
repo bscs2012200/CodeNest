@@ -13,6 +13,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const db = require('./models');
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 const RegisterModel = require('./models/Register');
 const StudentModel = require('./models/Student');
 const ExamModel = require('./models/examModel');
@@ -257,7 +259,7 @@ app.post('/register', (req, res) => {
 
 app.post('/saveTest', async (req, res) => {
     try {
-      const { testId, questions, language, testType, duration, email,courseName,totalMarks } = req.body;
+      const { testId, questions, language, testType, duration, email,courseName,totalMarks,section } = req.body;
   
       // Check if test type, language, and duration are defined
       if (!testType) {
@@ -285,7 +287,7 @@ app.post('/saveTest', async (req, res) => {
       }
   
       const newQuestions = questions.map(({ question, marks }) => ({ question, marks }));
-      const newExam = new ExamModel({ testId, questions: newQuestions, language, testType, duration, email,courseName,totalMarks });
+      const newExam = new ExamModel({ testId, questions: newQuestions, language, testType, duration, email,courseName,totalMarks,section });
       await newExam.save();
   
       res.json({ success: true, message: 'Test saved successfully' });
@@ -348,7 +350,7 @@ app.put('/updateTest/:testId', async (req, res) => {
 
 app.put('/updateQuestion/:testId', async (req, res) => {
   const { testId } = req.params;
-  const { questionIndex, updatedQuestion, totalMarks } = req.body;
+  const { questionIndex, updatedQuestion, totalMarks,section } = req.body;
 
   // Check if updated question and marks are empty
   if (!updatedQuestion.question || !updatedQuestion.marks) {
@@ -723,11 +725,12 @@ app.delete('/ques/:id', async (req, res) => {
 
 app.post('/testattempt', async (req, res) => {
   try {
-    const { regno, src, extension, filename, language, questionId,name } = req.body;
+    const { regno, src, extension, filename, language, questionId,name,date } = req.body;
     const collectionName = req.body.testId;
 
     // Create model with custom collection name
     const Testattempt = createTestattemptModel(collectionName);
+    // console.log('Received Data:', { regno, src, extension, filename, language, questionId, name, date });
 
     // Try to find an existing document with the same regno and questionId
     const existingDocument = await Testattempt.findOne({ regno, questionId });
@@ -738,7 +741,7 @@ app.post('/testattempt', async (req, res) => {
       res.send('updated');
     } else {
       // Create a new document with provided data
-      await Testattempt.create({ regno, src, extension, filename, language, questionId,name });
+      await Testattempt.create({ regno, src, extension, filename, language, questionId,name,date });
       res.send('saved');
     }
   } catch (error) {
@@ -774,7 +777,68 @@ app.get('/getTestResults/:testId', async (req, res) => {
 });
 
 
+const users = {}; // Store user data and OTPs
 
+// Configure the email transporter
+const transporter = nodemailer.createTransport({
+  service: 'gmail', // or another email service
+  auth: {
+    user: 'codenest94@gmail.com', // Your email
+    pass: 'sxdb ncxm lbps clav' // Your email password or an app password
+  }
+});
+
+// Send OTP
+app.post('/send-otp', (req, res) => {
+  const { email } = req.body;
+  
+  if (!email) {
+    return res.status(400).json("Email is required");
+  }
+
+  // Generate OTP
+  const otp = crypto.randomInt(100000, 999999).toString();
+
+  // Store OTP for the user
+  users[email] = { otp };
+
+  // Send OTP via email
+  const mailOptions = {
+    from: 'codenest94@gmail.com',
+    to: email,
+    subject: 'Your OTP Code',
+    text: `We received a request to reset your CodeNest password.
+Enter the following password reset code: ${otp}
+
+Didn't request this change?
+If you didn't request a new password, kindly ignore this message.
+`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      return res.status(500).json("Failed to send OTP");
+    }
+    res.json("OTP sent");
+  });
+});
+
+// Verify OTP
+app.post('/verify-otp', (req, res) => {
+  const { email, otp } = req.body;
+
+  if (!email || !otp) {
+    return res.status(400).json("Email and OTP are required");
+  }
+
+  const user = users[email];
+  if (user && user.otp === otp) {
+    res.json("OTP verified");
+  } else {
+    res.status(400).json("Invalid OTP");
+  }
+});
 
 
 app.listen(3001, () => {

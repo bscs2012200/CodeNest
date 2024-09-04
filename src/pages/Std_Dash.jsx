@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import NavBar from '../components/NavBar.jsx';
-import Hamburger from '../components/Hamburger';
+
 import { useNavigate,Link } from 'react-router-dom';
 import './std.css';
 import Cookies from 'js-cookie';
@@ -71,10 +70,10 @@ const Std_Dash = () => {
       </div>
      <br></br>
      <div className='button-container'></div>
-     <button onClick={() => handleNavigation('/at')} className='Loginteacher' style={{marginLeft:'22%'}} >
+     <button onClick={() => handleNavigation('/at')} className='button99' style={{marginLeft:'25%'}} >
           Attempt test
         </button>
-        <button onClick={() => handleNavigation2()} className='Loginteacher' style={{marginLeft:'2%'}} >
+        <button onClick={() => handleNavigation2()} className='button99' style={{marginLeft:'2%'}} >
           Practice environment
         </button>
         

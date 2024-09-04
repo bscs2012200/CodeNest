@@ -22,6 +22,7 @@ import TestAttemptPage from './pages/TestAttemptPage.jsx';
 import TestDetailsPage from './pages/TestDetailsPage.jsx';
 import TestListPage from './pages/TestListPage.jsx';
 import Submissions from './pages/Submissions.jsx';
+import ForgotPassword from './pages/ForgotPassword.jsx';
 function App() {
  return (
     <Router>
@@ -48,6 +49,7 @@ function App() {
         <Route path="/ot" element={<TestAttemptPage />} />
         <Route path="/at" element={<TestDetailsPage />} />
         <Route path="/s" element={<Submissions/>} />
+        <Route path="/forgotpassword" element={<ForgotPassword/>} />
 
       </Routes>
     </Router>

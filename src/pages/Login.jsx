@@ -36,7 +36,7 @@ function Login() {
     </div>
       <div className='login-card'>
       <div class="logo-container">
-      <img src={Logo} className="CNlogo" alt="CodeNest Logo"/>
+      <img src={Logo} className="Loginlogo" alt="CodeNest Logo"/>
       </div>
         <h2 className="fw-bold fs-5" style={{textAlign: 'center'}}>Sign in to your account</h2>
         <form onSubmit={handleSubmit}>
@@ -61,6 +61,8 @@ function Login() {
             Login
           </button>
           <div className="login-links">
+            <Link to="/forgotpassword">Forgot your password?</Link>
+            <br></br>
             <Link to="/register">Don't have an account? Register</Link>
             <br />
            
