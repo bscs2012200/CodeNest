@@ -1,0 +1,70 @@
+.dashboard-container {
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  display: flex;
+  background-image: linear-gradient(315deg, #d5ddf8, #fff 57%);
+
+}
+
+
+
+.welcome {
+  margin-left: 15%;
+  width: 70%; /* Changed from 'width: 150%' */
+  height: 30%;
+  
+  --color: rgba(114, 114, 114, 0.3);
+  background-color: #130f40;
+  background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent),
+      linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent);
+  background-size: 55px 55px;
+
+  border-radius: 20px;
+  position: relative;
+}
+
+.dhead {
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+  width: calc(100% - 40px);
+  color: white;
+}
+
+.date {
+  color: white;
+  position: absolute; /* Position the date absolutely within the welcome div */
+  top: 30px; /* Adjust the distance from the bottom */
+  left: 30px; /* Adjust the distance from the right */
+  font-size: 22px
+}
+
+.boy {
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translateY(-50%);
+  width: 320px;
+  height: auto;
+}
+.programmer {
+  position: absolute;
+  top: 48%;
+  left: 68%;
+  transform: translateY(-50%);
+  width: 210px;
+  height: auto;
+}
+
+
+.page {
+  overflow-y: auto;
+  flex: 1;
+  padding: 20px;
+}
+.button-container {
+  display: flex; /* Display children inline */
+  justify-content: center;
+  margin-top: 100px;
+}

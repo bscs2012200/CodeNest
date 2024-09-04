@@ -1,0 +1,225 @@
+/* TestAttemptPage2.css */
+.test-attempt-page {
+    height: 100vh;
+    width: 100vw;
+    
+  }
+  
+ 
+  
+ 
+  
+  /* IDES.css */
+
+  .fa.fa-play {
+    margin: 0;
+  }
+  
+  .editor-container {
+    margin-bottom: 10px;
+  }
+  
+  .compile-btn {
+    margin-bottom: 10px;
+  }
+  
+  .output-text {
+    font-weight: bold;
+  }
+  
+  .output-container {
+    width: 100%;
+    height: 200px;
+    background-color: #f5f5f5;
+    overflow: auto;
+  }
+  
+
+
+  .input-container {
+    position: relative;
+    display: flex;
+    height: 2.8rem;
+    width: 100%;
+    min-width: 200px;
+    max-width: 250px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, .05);
+    margin-left: 40%;
+    margin-top: 10%;
+    
+  }
+  
+  .input-container input {
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid  rgb(176 190 197);
+    background-color: transparent;
+    padding: 0.625rem 70px 0.625rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+    color: rgb(69 90 100);
+    outline: none;
+    transition: all .15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .input-container input:focus {
+    border: 1px solid #0d6efd;
+  }
+  
+  .start-btn {
+    position: absolute;
+    width: 65px;
+    right: 4px;
+    top: 4px;
+    bottom: 4px;
+    z-index: 10;
+    border-radius: 4px;
+    background-color: #0d6efd;
+    color: #fff;
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+    transition: .6s ease;
+  }
+  
+  .start-btn:hover {
+    right: 2px;
+    top: 2px;
+    bottom: 2px;
+    border-radius: 8px;
+  }
+  
+  .input-container input:placeholder-shown ~ .start-btn {
+    pointer-events: none;
+    background-color: gray;
+    opacity: 0.5;
+  }
+
+
+ .questiont{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: large;
+ }
+
+
+  /* Test attempt page css */
+
+ .cntn{
+    width: 100%;
+  overflow-y: auto;
+  flex: 1;
+  padding: 20px;
+  
+ }
+
+
+ .tools {
+  display: flex;
+  align-items: center;
+  padding: 9px;
+ }
+ 
+ .circle {
+  padding: 0 4px;
+ }
+ 
+ .box {
+  display: inline-block;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  padding: 1px;
+  border-radius: 50%;
+ }
+ 
+ .red {
+  background-color: #ff605c;
+ }
+ 
+ .yellow {
+  background-color: #ffbd44;
+ }
+ 
+ .green {
+  background-color: #00ca4e;
+ }
+
+ .question-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+/* Add this CSS to your TestAttemptPage2.css file */
+.countdown {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff0000; /* Red color for countdown text */
+}
+
+.submission-success {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.9); /* Optionally add a semi-transparent background */
+}
+
+.svg-container {
+  width: 200px;
+  height: 200px;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+.path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 0;
+}
+
+.path.circle {
+  animation: dash .9s ease-in-out;
+}
+
+.path.check {
+  stroke-dashoffset: -100;
+  animation: dash-check .9s .35s ease-in-out forwards;
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dash-check {
+  0% {
+    stroke-dashoffset: -100;
+  }
+  100% {
+    stroke-dashoffset: 900;
+  }
+}
